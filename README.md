@@ -31,8 +31,8 @@ inject_py(pid, python_code)
 This example runs a python program that prints its pid, and then attaches to the newly created process and
 injects it with another print statement using hypno.
 ```shell script
-python -c "import os, time; print('Hello from', os.getpid()); time.sleep(0.5)" &\
-hypno $! "import os; print('Hello again from', os.getpid())"
+python -c "import os, time; a=1337; time.sleep(3); print('Hello from the original', os.getpid());time.sleep(0.5)" &\
+sudo `which hypno` $! "print('I am injected into PID', os.getpid(), 'here is a local var a =', a)" # need root for ptrace; no need to import os because we already have their variables. 
 ```
 
 ### How it works
